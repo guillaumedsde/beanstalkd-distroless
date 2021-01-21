@@ -1,7 +1,7 @@
 #!/bin/sh
 set -x
 
-VERSION=${VERSION:-"$(curl --silent "https://api.github.com/repos/beanstalkd/beanstalkd/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')"}
+VERSION=${VERSION:-"$(git ls-remote --tags --refs --sort="v:refname" git://github.com/beanstalkd/beanstalkd.git | tail -n1 | sed 's/.*\///')"}
 
 if [ "${CI_COMMIT_REF_NAME}" = "master" ]; then
     TAGS=" -t ${CI_REGISTRY_USER}/${CI_PROJECT_NAME}:${VERSION} -t ${CI_REGISTRY_USER}/${CI_PROJECT_NAME}:latest "
