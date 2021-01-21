@@ -21,6 +21,21 @@ RUN mkdir /data
 
 FROM gcr.io/distroless/base:nonroot
 
+# Build-time metadata as defined at http://label-schema.org
+ARG BUILD_DATE
+ARG VCS_REF
+ARG BEANSTALKD_VERSION
+
+LABEL org.label-schema.build-date=$BUILD_DATE \
+    org.label-schema.name="beanstalkd-distroless" \
+    org.label-schema.description="Distroless container for the beanstalkd program" \
+    org.label-schema.url="https://guillaumedsde.gitlab.io/beanstalkd-distroless/" \
+    org.label-schema.vcs-ref=$VCS_REF \
+    org.label-schema.version=$BEANSTALKD_VERSION \
+    org.label-schema.vcs-url="https://github.com/guillaumedsde/beanstalkd-distroless" \
+    org.label-schema.vendor="guillaumedsde" \
+    org.label-schema.schema-version="1.0"
+
 COPY --from=build --chown=nonroot:nonroot /beanstalkd-bin /beanstalkd
 
 VOLUME /data
