@@ -1,6 +1,6 @@
 ARG VERSION=1.13
 
-FROM docker.io/gcc:13 as build
+FROM docker.io/gcc:10.2 as build
 
 ARG VERSION
 
