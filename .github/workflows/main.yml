@@ -6,7 +6,7 @@ jobs:
     uses: guillaumedsde/qbittorrent-distroless/.github/workflows/docker.yml@master
     with:
       # FIXME: retrieve this automatically
-      software-version: "1.12"
+      software-version: "1.13"
       platforms: |
         linux/amd64
     secrets: inherit
