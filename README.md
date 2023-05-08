@@ -1,6 +1,5 @@
 # [🐋 Beanstalkd-distroless](https://github.com/guillaumedsde/beanstalkd-distroless)
 
-[![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/guillaumedsde/beanstalkd-distroless)](https://guillaumedsde.gitlab.io/beanstalkd-distroless/)
 [![Docker Image Version (latest by date)](https://img.shields.io/docker/v/guillaumedsde/beanstalkd-distroless)](https://hub.docker.com/r/guillaumedsde/beanstalkd-distroless/tags)
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/guillaumedsde/beanstalkd-distroless)](https://hub.docker.com/r/guillaumedsde/beanstalkd-distroless)
 [![Docker Pulls](https://img.shields.io/docker/pulls/guillaumedsde/beanstalkd-distroless)](https://hub.docker.com/r/guillaumedsde/beanstalkd-distroless)
@@ -9,8 +8,9 @@
 [![Docker Stars](https://img.shields.io/docker/stars/guillaumedsde/beanstalkd-distroless)](https://hub.docker.com/r/guillaumedsde/beanstalkd-distroless)
 [![GitHub](https://img.shields.io/github/license/guillaumedsde/beanstalkd-distroless)](https://github.com/guillaumedsde/beanstalkd-distroless/blob/master/LICENSE.md)
 
+
 This repository contains the code to build a small and secure **[distroless](https://github.com/GoogleContainerTools/distroless)** **docker** image for **[Beanstalkd](https://github.com/beanstalkd/beanstalkd)** which can be run as an unprivileged user.
-The final images are built and hosted on the [dockerhub](https://hub.docker.com/r/guillaumedsde/beanstalkd-distroless) and the documentation is hosted on [gitlab pages](https://guillaumedsde.gitlab.io/beanstalkd-distroless/)
+The final images are built and hosted on the [dockerhub](https://hub.docker.com/r/guillaumedsde/beanstalkd-distroless).
 
 ## ✔️ Features summary
 
@@ -26,7 +26,7 @@ The final images are built and hosted on the [dockerhub](https://hub.docker.com/
 ```bash
 $ docker run  --read-only \
               --user "$(id -u):$(id -g)" \
-              -p 11300:11300 \
+              --port "11300:11300" \
               guillaumedsde/beanstalkd-distroless:latest
 ```
 
@@ -48,8 +48,6 @@ services:
 This container is built for many hardware platforms:
 
 - linux/amd64
-- linux/arm64
-- linux/ppc64le
 
 All you have to do is use a recent version of docker and it will pull the appropriate version of the image from the docker hub.
 
