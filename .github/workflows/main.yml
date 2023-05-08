@@ -1,0 +1,10 @@
+on:
+  push:
+
+jobs:
+  docker:
+    uses: ./.github/workflows/docker.yml
+    with:
+      platforms: |
+        linux/amd64
+    secrets: inherit
