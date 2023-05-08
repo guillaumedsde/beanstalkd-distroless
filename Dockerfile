@@ -1,16 +1,16 @@
-ARG BEANSTALKD_VERSION=1.12
+ARG VERSION=1.13
 
-FROM gcc:10 as build
+FROM docker.io/gcc:13 as build
 
-ARG BEANSTALKD_VERSION
+ARG VERSION
 
-ADD https://github.com/beanstalkd/beanstalkd/archive/v$BEANSTALKD_VERSION.tar.gz /beanstalkd.tgz
+ADD https://github.com/beanstalkd/beanstalkd/archive/v$VERSION.tar.gz /beanstalkd.tgz
 
 WORKDIR /beanstalkd
 
 RUN tar xvfz /beanstalkd.tgz 
 
-WORKDIR /beanstalkd/beanstalkd-$BEANSTALKD_VERSION
+WORKDIR /beanstalkd/beanstalkd-$VERSION
 
 RUN make
 
@@ -20,21 +20,6 @@ RUN cp beanstalkd /beanstalkd-bin \
 RUN mkdir /data
 
 FROM gcr.io/distroless/base:nonroot
-
-# Build-time metadata as defined at http://label-schema.org
-ARG BUILD_DATE
-ARG VCS_REF
-ARG BEANSTALKD_VERSION
-
-LABEL org.label-schema.build-date=$BUILD_DATE \
-    org.label-schema.name="beanstalkd-distroless" \
-    org.label-schema.description="Distroless container for the beanstalkd program" \
-    org.label-schema.url="https://guillaumedsde.gitlab.io/beanstalkd-distroless/" \
-    org.label-schema.vcs-ref=$VCS_REF \
-    org.label-schema.version=$BEANSTALKD_VERSION \
-    org.label-schema.vcs-url="https://github.com/guillaumedsde/beanstalkd-distroless" \
-    org.label-schema.vendor="guillaumedsde" \
-    org.label-schema.schema-version="1.0"
 
 COPY --from=build --chown=nonroot:nonroot /beanstalkd-bin /beanstalkd
 
